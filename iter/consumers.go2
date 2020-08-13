@@ -1,0 +1,46 @@
+package iter
+
+func ForEach[type T](i Iterator[T], f func(T)) {
+	for {
+		item, ok := i.Next()
+		if !ok {
+			break
+		}
+		f(item)
+	}
+}
+
+type Arithmetic interface {
+	type int, uint,
+		int8, uint8,
+		int16, uint16,
+		int32, uint32,
+		int64, uint64,
+		float32, float64
+}
+
+func Sum[type T Arithmetic](i Iterator[T]) T {
+	var result T
+	for {
+		item, ok := i.Next()
+		if !ok {
+			break
+		}
+		result += item
+	}
+	return result
+}
+
+
+func ToSlice[type T](iter Iterator[T]) []T {
+	// TODO cast Iterator to SizeHintIterator to pre-allocate array
+	result := []T{}
+	for {
+		item, ok := iter.Next()
+		if !ok {
+			break
+		}
+		result = append(result, item)
+	}
+	return result
+}

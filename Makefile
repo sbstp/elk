@@ -1,10 +1,9 @@
 .ONESHELL:
 SHELL := bash
 
-.PHONY: test
-test:
-
-	GOROOT=$(PWD)/goroot goroot/bin/go tool go2go run src/main.go2
+.PHONY: run
+run:
+	goroot/bin/go tool go2go run cmd/main.go2
 
 .PHONY: compiler
 compiler:

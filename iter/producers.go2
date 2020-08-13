@@ -1,0 +1,34 @@
+package iter
+
+type fromFnIter[type T] struct {
+	f func() (T, bool)
+}
+
+func (i fromFnIter[T]) Next() (T, bool) {
+	return i.f()
+}
+
+// FromFn creates an Iterator from a function.
+// It's convenient to use the state captured by a closure as the iterator state.
+// See FromSlice as an example of this.
+func FromFn[type T](next func() (T, bool)) Iterator[T] {
+	return fromFnIter[T]{next}
+}
+
+// FromSlice creates an iterator from a slice.
+func FromSlice[type T](slice []T) Iterator[T] {
+	pos := 0
+	len := len(slice)
+	return FromFn(func () (T, bool) {
+		var item T
+		ok := false
+
+		if pos < len {
+			item = slice[pos]
+			ok = true
+			pos += 1
+		}
+
+		return item, ok
+	})
+}

@@ -1,0 +1,27 @@
+package iter
+
+func Map[type T, U](iter Iterator[T], f func(T) U) Iterator[U] {
+	return FromFn(func () (U, bool) {
+		item, ok := iter.Next()
+		if ok {
+			return f(item), true
+		}
+		var zero U
+		return zero, false
+	})
+}
+
+func Filter[type T](iter Iterator[T], f func(T) bool) Iterator[T] {
+	return FromFn(func () (T, bool) {
+		for {
+			item, ok := iter.Next()
+			if !ok {
+				var zero T
+				return zero, false
+			}
+			if f(item) {
+				return item, true
+			}
+		}
+	})
+}

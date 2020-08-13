@@ -7,6 +7,7 @@ around common functional programming patterns and data structures.
 * Latest [draft design](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md) for
   generics.
 * VSCode [extension](https://github.com/golang/go/issues/39619) for Go 2 files.
+* Go 2 [examples](https://github.com/golang/go/tree/dev.go2go/src/cmd/go2go/testdata/go2path/src)
 
 ## Experiments
 * Iterators
@@ -27,3 +28,5 @@ The `Makefile` has what you need to get started. All you need is `make` and a wo
 
 `make compiler` will pull the Go compiler from Github, checkout the branch containing the go2go tool and compile it.
 The compiler will end up in `goroot/bin/go`.
+
+Note that the `go2go` tool does not support Go modules.

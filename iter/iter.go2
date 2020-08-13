@@ -1,0 +1,11 @@
+package iter
+
+
+type Iterator[type T] interface {
+	// Next returns the next item from the iterator. While there remains elements in the iterator,
+	// this method must return the next item and true. Once the operator is exhausted, this method
+	// must return a zero value and false.
+	Next() (T, bool)
+}
+
+
